@@ -21,7 +21,9 @@ func main() {
 
 	logInstance := initializeLogger()
 
+	// Handler for static files (frontend)
 	http.Handle("/", http.FileServer(http.Dir("public")))
+	// http.Handle("", http.)
 	fmt.Println("Serving the files")
 
 	const addr = ":8080"
