@@ -1,0 +1,19 @@
+# .air.toml
+root = "."
+tmr_dir = "tmp"
+
+[build]
+#cmd = "go build -o ./tmp/main ./main.go"
+#bin = "./tmp/main"
+cmd = "go build -o tmp\\main.exe main.go" (Windows adjusted)
+bin = "tmp\\main.exe" (Windows adjusted)
+include_ext = ["go"] #Only wath .go files
+#exclude_dir = ["tmp", "vendor", "node_modules", "public"]
+exclude_dir = ["./public", "./tmp", "./vendor", "./node_modules"]
+delay = 1000 #ms
+
+[log]
+time = true
+
+[misc]
+clean_on_exit = true
