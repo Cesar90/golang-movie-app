@@ -1,12 +1,15 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"cesarcordero.com/go/movieapp/handlers"
 	"cesarcordero.com/go/movieapp/logger"
+	"github.com/joho/godotenv"
 )
 
 func initializeLogger() *logger.Logger {
@@ -20,7 +23,24 @@ func initializeLogger() *logger.Logger {
 
 func main() {
 
+	// Log Initializer
 	logInstance := initializeLogger()
+
+	// Environments Variables
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("No .env file was available")
+	}
+	// Connect to the DB
+	dbConnStr := os.Getenv("DATABASE_URL")
+	if dbConnStr == "" {
+		log.Fatal("DATABASE_URL not set")
+	}
+	db, err := sql.Open("postgres", dbConnStr)
+	if err != nil {
+		log.Fatalf("Failed to connect to the DB: %v", err)
+	}
+	//Close connection after execute query
+	defer db.Close()
 
 	movieHandlers := handlers.MovieHandler{}
 
@@ -33,7 +53,7 @@ func main() {
 	fmt.Println("Serving the files")
 
 	const addr = ":8080"
-	err := http.ListenAndServe(addr, nil)
+	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		log.Fatalf("Server failed: %v", err)
 		logInstance.Error("Server failed", err)
