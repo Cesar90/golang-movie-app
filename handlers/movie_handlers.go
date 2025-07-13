@@ -7,7 +7,9 @@ import (
 	"cesarcordero.com/go/movieapp/models"
 )
 
-type MovieHandler struct{}
+type MovieHandler struct {
+	//TODO
+}
 
 func (h *MovieHandler) GetToMovies(w http.ResponseWriter, r *http.Request) {
 	movies := []models.Movie{
@@ -32,6 +34,6 @@ func (h *MovieHandler) GetToMovies(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Cotent-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(movies); err != nil {
-		//TODO: Log error
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
 }
