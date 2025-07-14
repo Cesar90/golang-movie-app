@@ -17,6 +17,7 @@ import (
 
 func initializeLogger() *logger.Logger {
 	logInstance, err := logger.NewLogger("movie.log")
+	// logInstance.Error("Hello from the Error system", nil)
 	if err != nil {
 		log.Fatalf("Failed to initialice logger: %v", err)
 	}
@@ -55,8 +56,11 @@ func main() {
 		Logger:  logInstance,
 	}
 
-	http.HandleFunc("/api/movies/top", movieHandlers.GetTopMovies)
-	http.HandleFunc("/api/movies/random", movieHandlers.GetRandomMovies)
+	http.HandleFunc("/api/movies/top/", movieHandlers.GetTopMovies)
+	http.HandleFunc("/api/movies/random/", movieHandlers.GetRandomMovies)
+	http.HandleFunc("/api/movies/search/", movieHandlers.SearchMovies)
+	http.HandleFunc("/api/movies/", movieHandlers.GetMovie) // api/movies/140
+	http.HandleFunc("/api/movies/genres/", movieHandlers.GetGenres)
 
 	// Handler for static files (frontend)
 	http.Handle("/", http.FileServer(http.Dir("public")))
