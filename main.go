@@ -9,7 +9,9 @@ import (
 
 	"cesarcordero.com/go/movieapp/handlers"
 	"cesarcordero.com/go/movieapp/logger"
+	data "cesarcordero.com/go/movieapp/movie_repositories"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 func initializeLogger() *logger.Logger {
@@ -25,6 +27,8 @@ func main() {
 
 	// Log Initializer
 	logInstance := initializeLogger()
+
+	movieHandlers := handlers.MovieHandler{}
 
 	// Environments Variables
 	if err := godotenv.Load(); err != nil {
@@ -42,7 +46,11 @@ func main() {
 	//Close connection after execute query
 	defer db.Close()
 
-	movieHandlers := handlers.MovieHandler{}
+	// Initialize Data Repository for Movies
+	movieRepo, err := data.NewMovieRepository(db, logInstance)
+	if err != nil {
+		log.Fatalf("Failed to initialize repository")
+	}
 
 	http.HandleFunc("/api/movies/top", movieHandlers.GetToMovies)
 	http.HandleFunc("/api/movies/random", movieHandlers.GetRandomMovies)
