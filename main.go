@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"os"
 
+	"cesarcordero.com/go/movieapp/data"
 	"cesarcordero.com/go/movieapp/handlers"
 	"cesarcordero.com/go/movieapp/logger"
-	data "cesarcordero.com/go/movieapp/movie_repositories"
+
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -27,8 +28,6 @@ func main() {
 
 	// Log Initializer
 	logInstance := initializeLogger()
-
-	movieHandlers := handlers.MovieHandler{}
 
 	// Environments Variables
 	if err := godotenv.Load(); err != nil {
@@ -51,8 +50,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to initialize repository")
 	}
+	movieHandlers := handlers.MovieHandler{
+		Storage: movieRepo,
+		Logger:  logInstance,
+	}
 
-	http.HandleFunc("/api/movies/top", movieHandlers.GetToMovies)
+	http.HandleFunc("/api/movies/top", movieHandlers.GetTopMovies)
 	http.HandleFunc("/api/movies/random", movieHandlers.GetRandomMovies)
 
 	// Handler for static files (frontend)
