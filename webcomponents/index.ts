@@ -1,5 +1,5 @@
 import { API } from "./services/API";
-import { HomePage } from "./components/HomeComponent";
+import { HomePage } from "./components/HomePage";
 
 window.addEventListener("DOMContentLoaded", event => {
     document.querySelector("main")?.appendChild(new HomePage())
