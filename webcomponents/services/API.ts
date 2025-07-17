@@ -1,10 +1,10 @@
 export const API = {
-    baseURL: "/api",
-    getToMovies: async () => {
-        return await API.fetch("movies/top/")
+    baseURL: "/api/",
+    getToMovies: async (): Promise<Movie[]> => {
+        return await API.fetch<undefined, Movie[]>("movies/top/")
     },
     getRandomMovies: async () => {
-        return await API.fetch("movies/random/")
+        return await API.fetch<undefined, Movie[]>("movies/random/")
     },
     getMovieById: async (id: string) => {
         return await API.fetch(`movies/${id}`)
