@@ -7,7 +7,8 @@ import './components/YoutubeEmbed'
 
 window.addEventListener("DOMContentLoaded", event => {
     // document.querySelector("main")?.appendChild(new HomePage())
-    document.querySelector("main")?.appendChild(new MovieDetailsPage())
+    // document.querySelector("main")?.appendChild(new MovieDetailsPage())
+    window.app.Router.init();
 })
 
 window.app = {

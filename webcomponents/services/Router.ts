@@ -6,6 +6,17 @@ export const Router = {
         window.addEventListener("popstate", () => {
             Router.go(location.pathname, false)
         })
+        // Enhance current links in the document
+        document.querySelectorAll("a.navlink").forEach((a) => {
+            a.addEventListener("click", event => {
+                event.preventDefault();
+                const href = a.getAttribute("href");
+                // const href = a.href("href");
+                if (href) {
+                    Router.go(href)
+                }
+            })
+        })
 
         // Go to the initial route
         Router.go(location.pathname + location.search)
@@ -36,14 +47,13 @@ export const Router = {
                 }
             }
         }
-
+        // debugger;
         if (pageElement === null) {
             pageElement = document.createElement("h1")
             pageElement.textContent = "Page not found"
-        } else {
-            // I have a page for the current URL
-            document.querySelector("main")!.innerHTML = "";
-            document.querySelector("main")!.appendChild(pageElement)
         }
+        // I have a page for the current URL
+        document.querySelector("main")!.innerHTML = "";
+        document.querySelector("main")!.appendChild(pageElement)
     }
 }
