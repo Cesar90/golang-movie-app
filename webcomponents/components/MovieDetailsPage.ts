@@ -21,6 +21,10 @@ export class MovieDetailsPage extends HTMLElement {
                 this.querySelector("h2")!.textContent = this.movie.title
                 this.querySelector("h3")!.textContent = this.movie.tagline
                 this.querySelector("img")!.src = this.movie.poster_url
+                const trailerElemet = this.querySelector("#trailer") as HTMLElement
+                if (trailerElemet) {
+                    trailerElemet.dataset.url = this.movie.trailer_url
+                }
                 this.querySelector("#overview")!.textContent = this.movie.overview
                 this.querySelector("#metadata")!.innerHTML = `
                     <dt>Release Year</dt>

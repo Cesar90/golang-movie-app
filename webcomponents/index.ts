@@ -2,6 +2,7 @@ import { API } from "./services/API";
 import { HomePage } from "./components/HomePage";
 import { MovieDetailsPage } from "./components/MovieDetailsPage";
 import './components/AnimatedLoading'
+import './components/YoutubeEmbed'
 
 window.addEventListener("DOMContentLoaded", event => {
     // document.querySelector("main")?.appendChild(new HomePage())
