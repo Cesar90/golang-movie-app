@@ -2,7 +2,12 @@ import { HomePage } from "../components/HomePage";
 import { MovieDetailsPage } from "../components/MovieDetailsPage";
 import { MoviePage } from "../components/MoviePage";
 
-export const routes = [
+type Route = {
+    path: string | RegExp;
+    component: typeof HTMLElement;
+}
+
+export const routes: Route[] = [
     {
         path: "/",
         component: HomePage
