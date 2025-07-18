@@ -16,7 +16,7 @@ declare global {
         title: string
         tagline: string
         release_year: number
-        genres: string[]
+        genres: Genre[]
         overview: string
         score: number
         popularity: number
@@ -24,6 +24,19 @@ declare global {
         language: string
         poster_url: string
         trailer_url: string
-        casting: string[]
+        casting: Casting[]
     }
+
+    interface Genre {
+        id: number
+        name: string
+    }
+
+    interface Casting {
+        id: number
+        first_name: string
+        last_name: string
+        image_url?: string
+    }
+
 }

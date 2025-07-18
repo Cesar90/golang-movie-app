@@ -4,7 +4,7 @@ import { MovieDetailsPage } from "./components/MovieDetailsPage";
 import './components/AnimatedLoading'
 
 window.addEventListener("DOMContentLoaded", event => {
-    document.querySelector("main")?.appendChild(new HomePage())
+    // document.querySelector("main")?.appendChild(new HomePage())
     document.querySelector("main")?.appendChild(new MovieDetailsPage())
 })
 
