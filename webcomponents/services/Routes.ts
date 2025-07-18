@@ -7,7 +7,7 @@ type Route = {
     component: typeof HTMLElement;
 }
 
-export const routes: Route[] = [
+export const ROUTES: Route[] = [
     {
         path: "/",
         component: HomePage
