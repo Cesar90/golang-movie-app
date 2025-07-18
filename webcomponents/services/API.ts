@@ -6,8 +6,8 @@ export const API = {
     getRandomMovies: async () => {
         return await API.fetch<undefined, Movie[]>("movies/random/")
     },
-    getMovieById: async (id: string) => {
-        return await API.fetch(`movies/${id}`)
+    getMovieById: async (id: number) => {
+        return await API.fetch<undefined, Movie>(`movies/${id}`)
     },
     searchMovies: async (q: string, order: string, genre: string[]) => {
         return await API.fetch("movies/search", { q, order, genre })
