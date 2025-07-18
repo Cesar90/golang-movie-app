@@ -1,10 +1,12 @@
 import { API } from "../services/API";
+import { Router } from "../services/Router";
 
 export { };
 
 declare global {
     interface Window {
         app: {
+            Router: typeof Router,
             search: (event: Event) => void,
             api: typeof API
         },

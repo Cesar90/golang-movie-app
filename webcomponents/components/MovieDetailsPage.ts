@@ -3,6 +3,7 @@ import { API } from "../services/API";
 export class MovieDetailsPage extends HTMLElement {
     movieId: number | undefined = undefined
     movie: Movie | undefined = undefined
+    params: string[] = [];
 
     async render() {
         if (this.movieId) {

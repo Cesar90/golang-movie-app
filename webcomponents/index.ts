@@ -1,4 +1,5 @@
 import { API } from "./services/API";
+import { Router } from "./services/Router";
 import { HomePage } from "./components/HomePage";
 import { MovieDetailsPage } from "./components/MovieDetailsPage";
 import './components/AnimatedLoading'
@@ -10,6 +11,7 @@ window.addEventListener("DOMContentLoaded", event => {
 })
 
 window.app = {
+    Router,
     search: (event: Event) => {
         event.preventDefault();
         const q = (document.querySelector("input[type=search]") as HTMLInputElement)!.value;

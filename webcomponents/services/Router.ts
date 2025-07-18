@@ -1,6 +1,7 @@
+import { MovieDetailsPage } from "../components/MovieDetailsPage"
 import { ROUTES } from "./Routes"
 
-const Router = {
+export const Router = {
     init: () => {
         window.addEventListener("popstate", () => {
             Router.go(location.pathname, false)
@@ -28,7 +29,10 @@ const Router = {
                 if (match) {
                     pageElement = new r.component();
                     const params = match.slice(1);
-                    // pageElement.params = params
+                    if (pageElement instanceof MovieDetailsPage) {
+                        pageElement.params = params
+                    }
+                    break;
                 }
             }
         }
