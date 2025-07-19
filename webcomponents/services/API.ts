@@ -9,8 +9,8 @@ export const API = {
     getMovieById: async (id: number) => {
         return await API.fetch<undefined, Movie>(`movies/${id}`)
     },
-    searchMovies: async (q: string, order: string, genre: string[]) => {
-        return await API.fetch("movies/search", { q, order, genre })
+    searchMovies: async (q: string, order: string, genre: string) => {
+        return await API.fetch<{ q: string, order: string, genre: string }, Movie[]>("movies/search", { q, order, genre })
     },
     fetch: async <TParams = undefined, TResult = unknown>(
         endpoint: string,
