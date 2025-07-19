@@ -7,6 +7,8 @@ declare global {
     interface Window {
         app: {
             Router: typeof Router,
+            showError: (message: string, goToHome: boolean) => void,
+            closeError: () => void;
             search: (event: Event) => void,
             api: typeof API
         },

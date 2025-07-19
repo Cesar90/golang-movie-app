@@ -10,7 +10,8 @@ export class MovieDetailsPage extends HTMLElement {
             try {
                 this.movie = await API.getMovieById(this.movieId)
             } catch (error) {
-                alert("Movie doesn't exist"); // TODO replace alert
+                // alert("Movie doesn't exist"); // TODO replace alert
+                window.app.showError("Movie doesn't exist", true)
                 return;
             }
 

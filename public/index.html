@@ -9,7 +9,7 @@
     <link rel="manifest" href="/app.webmanifest">
     <link rel="icon" href="/images/icon.png">
     <script src="/javascript/main.js"></script>
-    <base href="/" />
+    <!-- <base href="/" /> -->
 </head>
 
 <body>
@@ -42,6 +42,14 @@
         <!-- <animated-loading data-elements="5" data-height="200px" data-width="300px">
         </animated-loading> -->
     </main>
+
+    <dialog id="alert-modal">
+        <h3>
+            Error
+        </h3>
+        <p>There was an error loading the page</p>
+        <button onclick="app.closeError()">Ok</button>
+    </dialog>
 
     <!-- Templates -->
     <template id="template-home">
