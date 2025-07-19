@@ -60,7 +60,17 @@ func main() {
 	http.HandleFunc("/api/movies/random/", movieHandlers.GetRandomMovies)
 	http.HandleFunc("/api/movies/search/", movieHandlers.SearchMovies)
 	http.HandleFunc("/api/movies/", movieHandlers.GetMovie) // api/movies/140
-	http.HandleFunc("/api/movies/genres/", movieHandlers.GetGenres)
+	http.HandleFunc("/api/genres/", movieHandlers.GetGenres)
+
+	catchAllClientRoutesHandler := func(w http.ResponseWriter, r *http.Request) {
+		// 1) HTTP Redirect 301 / 302
+		// 2) Deliver the index.html
+		http.ServeFile(w, r, "./public/index.html")
+	}
+
+	http.HandleFunc("/movies", catchAllClientRoutesHandler)
+	http.HandleFunc("/movies/", catchAllClientRoutesHandler)
+	http.HandleFunc("/account/", catchAllClientRoutesHandler)
 
 	// Handler for static files (frontend)
 	http.Handle("/", http.FileServer(http.Dir("public")))
