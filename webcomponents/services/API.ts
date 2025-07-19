@@ -1,5 +1,8 @@
 export const API = {
     baseURL: "/api/",
+    getGenres: async (): Promise<Genre[]> => {
+        return await API.fetch<undefined, Genre[]>("genres/")
+    },
     getToMovies: async (): Promise<Movie[]> => {
         return await API.fetch<undefined, Movie[]>("movies/top/")
     },

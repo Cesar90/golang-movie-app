@@ -23,12 +23,25 @@ export class MoviesPage extends HTMLElement {
             ulMovies.innerHTML = "<h3>There are no movies with your search</h3>";
         }
 
-        //await this.loadGenres();
+        await this.loadGenres();
 
         if (order) (this.querySelector("#order") as HTMLSelectElement)!.value = order;
         if (genre) (this.querySelector("#filter") as HTMLSelectElement)!.value = genre;
     }
 
+    async loadGenres() {
+        const genres = await API.getGenres();
+        const select = this.querySelector("select#filter");
+        select!.innerHTML = `
+            <option>Filter by Genre</option>
+        `
+        genres.forEach((genre) => {
+            var option = document.createElement("option") as HTMLOptionElement
+            option.value = genre.id.toString();
+            option.textContent = genre.name;
+            select?.appendChild(option)
+        })
+    }
 
     connectedCallback() {
         const template = document.getElementById("template-movies") as HTMLTemplateElement;

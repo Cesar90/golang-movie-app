@@ -30,5 +30,17 @@ window.app = {
         const q = (document.querySelector("input[type=search]") as HTMLInputElement)!.value;
         window.app.Router.go("/movies?q=" + q)
     },
+    searchOrderChange: (order: string) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get("q");
+        const genre = urlParams.get("genre") ?? "";
+        window.app.Router.go(`/movies?q=${q}&order=${order}&genre=${genre}`);
+    },
+    searchFilterChange: (genre: string) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get("q");
+        const order = urlParams.get("order") ?? "";
+        window.app.Router.go(`/movies?q=${q}&order=${order}&genre=${genre}`);
+    },
     api: API
 };

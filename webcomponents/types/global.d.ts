@@ -10,6 +10,8 @@ declare global {
             showError: (message: string, goToHome: boolean) => void,
             closeError: () => void;
             search: (event: Event) => void,
+            searchOrderChange: (order: string) => void,
+            searchFilterChange: (genre: string) => void,
             api: typeof API
         },
     }
