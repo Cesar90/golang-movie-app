@@ -1,4 +1,5 @@
 import { HomePage } from "../components/HomePage";
+import { LoginPage } from "../components/LoginPage";
 import { MovieDetailsPage } from "../components/MovieDetailsPage";
 import { MoviesPage } from "../components/MoviesPage";
 import { RegisterPage } from "../components/RegisterPage";
@@ -24,5 +25,9 @@ export const ROUTES: Route[] = [
     {
         path: "/account/register", //Search results
         component: RegisterPage
+    },
+    {
+        path: "/account/login", //Search results
+        component: LoginPage
     },
 ]

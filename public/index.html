@@ -129,6 +129,25 @@
         </section>
     </template>
 
+    <template id="template-login">
+        <section>
+            <h2>Log In</h2>
+            <form onsubmit="window.app.login(event)">
+
+                <label for="login-email">E-mail</label>
+                <input id="login-email" required type="email" autocomplete="email">
+
+                <label for="login-password">Password</label>
+                <input id="login-password" required type="password" autocomplete="current-password">
+
+                <button>Log In</button>
+
+                <p>If you don't an account, please <a href="/account/register">register.</a></p>
+
+            </form>
+        </section>
+    </template>
+
     <footer>
         <p>(C) Golang Movie App</p>
     </footer>
