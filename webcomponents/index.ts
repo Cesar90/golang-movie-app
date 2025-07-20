@@ -1,4 +1,6 @@
 import { API } from "./services/API";
+import { Store } from "./services/Store";
+// import proxiedStore from "./services/Store";
 import { Router } from "./services/Router";
 import { HomePage } from "./components/HomePage";
 import { MovieDetailsPage } from "./components/MovieDetailsPage";
@@ -13,6 +15,7 @@ window.addEventListener("DOMContentLoaded", event => {
 
 window.app = {
     Router,
+    Store,
     showError: (message = "There was an error.", goToHome = true) => {
         const erroModal = document.getElementById("alert-modal");
         (erroModal as HTMLDialogElement).showModal();
@@ -58,6 +61,7 @@ window.app = {
         if (errors.length === 0) {
             const response = await API.register(name, email, password)
             if (response.success) {
+                window.app.Store.jwt = response.jwt;
                 window.app.Router.go('/account/')
             } else {
                 window.app.showError(response.message, false)
@@ -78,6 +82,7 @@ window.app = {
         if (errors.length === 0) {
             const response = await API.login(email, password)
             if (response.success) {
+                window.app.Store.jwt = response.jwt;
                 window.app.Router.go('/account/')
             } else {
                 window.app.showError(response.message, false)

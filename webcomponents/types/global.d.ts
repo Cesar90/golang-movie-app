@@ -1,4 +1,5 @@
 import { API } from "../services/API";
+import { Store } from "../services/Store";
 import { Router } from "../services/Router";
 
 export { };
@@ -7,6 +8,7 @@ declare global {
     interface Window {
         app: {
             Router: typeof Router,
+            Store: typeof Store,
             showError: (message: string, goToHome: boolean) => void,
             closeError: () => void;
             search: (event: Event) => void,
@@ -17,6 +19,11 @@ declare global {
             api: typeof API
         },
     }
+
+    type StoreType = {
+        jwt: string | null;
+        readonly loggedIn: boolean;
+    };
 
     interface Movie {
         id: number
@@ -50,6 +57,7 @@ declare global {
     interface AuthResponse {
         success: boolean
         message: string
+        jwt: string
     }
 
 }
