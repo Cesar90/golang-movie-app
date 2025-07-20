@@ -6,6 +6,8 @@ import (
 
 	"cesarcordero.com/go/movieapp/data"
 	"cesarcordero.com/go/movieapp/logger"
+	"cesarcordero.com/go/movieapp/models"
+	"cesarcordero.com/go/movieapp/token"
 )
 
 // Define request structure
@@ -24,6 +26,7 @@ type AuthRequest struct {
 type AuthResponse struct {
 	Success bool   `json:"success"`
 	Message string `json:"message"`
+	JWT     string `json:"jwt"`
 }
 
 type AccountHandler struct {
@@ -82,6 +85,8 @@ func (h *AccountHandler) Register(w http.ResponseWriter, r *http.Request) {
 	response := AuthResponse{
 		Success: success,
 		Message: "User registered successfully",
+
+		JWT: token.CreateJWT(models.User{Email: req.Email, Name: req.Name}, *h.logger),
 	}
 
 	if err := h.writeJSONResponse(w, response); err == nil {
@@ -134,6 +139,7 @@ func (h *AccountHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
 	response := AuthResponse{
 		Success: success,
 		Message: "User Login successfully",
+		JWT:     token.CreateJWT(models.User{Email: req.Email}, *h.logger),
 	}
 
 	if err := h.writeJSONResponse(w, response); err == nil {
