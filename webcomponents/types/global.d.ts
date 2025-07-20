@@ -12,6 +12,8 @@ declare global {
             search: (event: Event) => void,
             searchOrderChange: (order: string) => void,
             searchFilterChange: (genre: string) => void,
+            register: (event: Event) => void,
+            login: (event: Event) => void,
             api: typeof API
         },
     }
@@ -43,6 +45,11 @@ declare global {
         first_name: string
         last_name: string
         image_url?: string
+    }
+
+    interface AuthResponse {
+        success: boolean
+        message: string
     }
 
 }

@@ -15,6 +15,33 @@ export const API = {
     searchMovies: async (q: string, order: string, genre: string) => {
         return await API.fetch<{ q: string, order: string, genre: string }, Movie[]>("movies/search", { q, order, genre })
     },
+    register: async (name: string, email: string, password: string) => {
+        return await API.send<{ name: string, email: string, password: string }, AuthResponse>("/account/authenticate/", { name, email, password })
+    },
+    login: async (email: string, password: string) => {
+        return await API.send<{ email: string, password: string }, AuthResponse>("/account/authenticate/", { email, password })
+    },
+    send: async <TData = undefined, TResult = unknown>(
+        endpoint: string,
+        data: TData
+    ): Promise<TResult> => {
+        let url = `${API.baseURL}${endpoint}`;
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            return result as TResult;
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+    },
     fetch: async <TParams = undefined, TResult = unknown>(
         endpoint: string,
         params?: TParams
