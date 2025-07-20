@@ -1,6 +1,7 @@
 import { HomePage } from "../components/HomePage";
 import { MovieDetailsPage } from "../components/MovieDetailsPage";
 import { MoviesPage } from "../components/MoviesPage";
+import { RegisterPage } from "../components/RegisterPage";
 
 type Route = {
     path: string | RegExp;
@@ -19,5 +20,9 @@ export const ROUTES: Route[] = [
     {
         path: "/movies", //Search results
         component: MoviesPage
+    },
+    {
+        path: "/account/register", //Search results
+        component: RegisterPage
     },
 ]
