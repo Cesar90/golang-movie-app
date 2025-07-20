@@ -95,5 +95,27 @@ window.app = {
         Store.jwt = null;
         window.app.Router.go("/")
     },
+    saveToCollection: async (movie_id: number, collection: string) => {
+        if (window.app.Store.loggedIn) {
+            try {
+                const response = await API.saveToCollection(movie_id, collection);
+                if (response.success) {
+                    switch (collection) {
+                        case "favorite":
+                            window.app.Router.go("/account/favorites")
+                            break;
+                        case "watchlist":
+                            window.app.Router.go("/account/watchlist")
+                    }
+                } else {
+                    window.app.showError("We couldn't save the movie.", false)
+                }
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            window.app.Router.go("/account/");
+        }
+    },
     api: API
 };

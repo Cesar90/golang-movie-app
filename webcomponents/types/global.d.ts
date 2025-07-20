@@ -17,6 +17,7 @@ declare global {
             register: (event: Event) => void,
             login: (event: Event) => void,
             logout: () => void,
+            saveToCollection: (movieId: number, collection: string) => void,
             api: typeof API
         },
     }
@@ -59,6 +60,11 @@ declare global {
         success: boolean
         message: string
         jwt: string
+    }
+
+    interface CollectionResponse {
+        success: boolean
+        message: string
     }
 
 }

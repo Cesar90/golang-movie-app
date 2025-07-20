@@ -28,7 +28,7 @@ export const API = {
         return await API.fetch<undefined, Movie[]>("account/watchlist")
     },
     saveToCollection: async (movieId: number, collection: string) => {
-
+        return await API.send<{ movie_id: number, collection: string }, CollectionResponse>("account/save-to-collection/", { movie_id: movieId, collection })
     },
     send: async <TData = undefined, TResult = unknown>(
         endpoint: string,
