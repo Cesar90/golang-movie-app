@@ -90,8 +90,34 @@ func (h *AccountHandler) Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AccountHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
+
+	// log.Println("Request method:", r.Method)
+	// log.Println("Request URL:", r.URL.Path)
+
+	// if r.Method != http.MethodPost {
+	// 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	// 	return
+	// }
+
+	// bodyBytes, err := io.ReadAll(r.Body)
+	// if err != nil {
+	// 	log.Println("Error reading body:", err)
+	// 	http.Error(w, "Can't read body", http.StatusBadRequest)
+	// 	return
+	// }
+
+	// // Log or print the raw JSON body
+	// log.Println("Raw request body:", string(bodyBytes))
+
 	// Parse request body
 	var req AuthRequest
+
+	// if err := json.Unmarshal(bodyBytes, &req); err != nil {
+	// 	h.logger.Error("Failed to decode authentication request", err)
+	// 	http.Error(w, "Invalid request body", http.StatusBadRequest)
+	// 	return
+	// }
+
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		h.logger.Error("Failed to decode authentication request", err)
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -107,7 +133,7 @@ func (h *AccountHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
 	// Return success response
 	response := AuthResponse{
 		Success: success,
-		Message: "User registered successfully",
+		Message: "User Login successfully",
 	}
 
 	if err := h.writeJSONResponse(w, response); err == nil {

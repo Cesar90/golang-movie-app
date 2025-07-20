@@ -65,10 +65,26 @@ window.app = {
         } else {
             window.app.showError(errors.join(". "), false)
         }
-
     },
-    login: (event: Event) => {
+    login: async (event: Event) => {
         event.preventDefault();
+        const email = (document.getElementById("login-email") as HTMLInputElement)!.value
+        const password = (document.getElementById("login-password") as HTMLInputElement)!.value
+
+        const errors = [];
+        if (password.length < 7) errors.push("Enter a password with at least 7 characters");
+        if (email.length < 4) errors.push("Enter your complete name");
+
+        if (errors.length === 0) {
+            const response = await API.login(email, password)
+            if (response.success) {
+                window.app.Router.go('/account/')
+            } else {
+                window.app.showError(response.message, false)
+            }
+        } else {
+            window.app.showError(errors.join(". "), false)
+        }
     },
     api: API
 };

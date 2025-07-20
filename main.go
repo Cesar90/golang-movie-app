@@ -68,8 +68,8 @@ func main() {
 	http.HandleFunc("/api/movies/search/", movieHandlers.SearchMovies)
 	http.HandleFunc("/api/movies/", movieHandlers.GetMovie) // api/movies/140
 	http.HandleFunc("/api/genres/", movieHandlers.GetGenres)
-	http.HandleFunc("/api/account/register", accountHandler.Register)
-	http.HandleFunc("/api/account/authenticate", accountHandler.Authenticate)
+	http.HandleFunc("/api/account/register/", accountHandler.Register)
+	http.HandleFunc("/api/account/authenticate/", accountHandler.Authenticate)
 
 	catchAllClientRoutesHandler := func(w http.ResponseWriter, r *http.Request) {
 		// 1) HTTP Redirect 301 / 302

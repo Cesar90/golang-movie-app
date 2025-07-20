@@ -16,10 +16,10 @@ export const API = {
         return await API.fetch<{ q: string, order: string, genre: string }, Movie[]>("movies/search", { q, order, genre })
     },
     register: async (name: string, email: string, password: string) => {
-        return await API.send<{ name: string, email: string, password: string }, AuthResponse>("/account/authenticate/", { name, email, password })
+        return await API.send<{ name: string, email: string, password: string }, AuthResponse>("account/register/", { name, email, password })
     },
     login: async (email: string, password: string) => {
-        return await API.send<{ email: string, password: string }, AuthResponse>("/account/authenticate/", { email, password })
+        return await API.send<{ email: string, password: string }, AuthResponse>("account/authenticate/", { email, password })
     },
     send: async <TData = undefined, TResult = unknown>(
         endpoint: string,
