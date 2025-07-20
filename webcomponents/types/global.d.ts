@@ -16,6 +16,7 @@ declare global {
             searchFilterChange: (genre: string) => void,
             register: (event: Event) => void,
             login: (event: Event) => void,
+            logout: () => void,
             api: typeof API
         },
     }

@@ -91,5 +91,9 @@ window.app = {
             window.app.showError(errors.join(". "), false)
         }
     },
+    logout: () => {
+        Store.jwt = null;
+        window.app.Router.go("/")
+    },
     api: API
 };
