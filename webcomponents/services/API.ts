@@ -21,6 +21,15 @@ export const API = {
     login: async (email: string, password: string) => {
         return await API.send<{ email: string, password: string }, AuthResponse>("account/authenticate/", { email, password })
     },
+    getFavotites: async () => {
+        return await API.fetch<undefined, Movie[]>("account/favorites")
+    },
+    getWatchlist: async () => {
+        return await API.fetch<undefined, Movie[]>("account/watchlist")
+    },
+    saveToCollection: async (movieId: number, collection: string) => {
+
+    },
     send: async <TData = undefined, TResult = unknown>(
         endpoint: string,
         data: TData
@@ -31,7 +40,8 @@ export const API = {
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": window.app.Store.jwt ? `Bearer ${window.app.Store.jwt}` : ''
                 },
                 body: JSON.stringify(data)
             });
@@ -62,7 +72,13 @@ export const API = {
         }
 
         try {
-            const response = await fetch(url);
+            const response = await fetch(url,
+                {
+                    headers: {
+                        "Authorization": window.app.Store.jwt ? `Bearer ${window.app.Store.jwt}` : ''
+                    }
+                }
+            );
             const result = await response.json();
             return result as TResult;
         } catch (e) {
