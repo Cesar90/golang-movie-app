@@ -14,7 +14,11 @@ const proxiedStore = new Proxy<StoreType>(store, {
     set: (target, prop: keyof StoreType, value: string) => {
         if (prop === 'jwt') {
             target[prop] = value;
-            localStorage.setItem("jwt", value);
+            if (value === null) {
+                localStorage.removeItem("jwt");
+            } else {
+                localStorage.setItem("jwt", value);
+            }
         }
         return true;
     }

@@ -29,10 +29,13 @@ export const Router = {
 
         const routePath = route.includes("?") ? route.split("?")[0] : route;
 
+        let needsLogin = false
+
         for (const r of ROUTES) {
             if (typeof r.path === "string" && r.path === routePath) {
                 // String path
                 pageElement = new r.component();
+                needsLogin = r.loggedIn
                 break;
             } else if (r.path instanceof RegExp) {
                 // RegExp
@@ -43,10 +46,21 @@ export const Router = {
                     if (pageElement instanceof MovieDetailsPage) {
                         pageElement.params = params
                     }
+                    needsLogin = r.loggedIn
                     break;
                 }
             }
         }
+
+        if (pageElement) {
+            // We have a page from routes
+            if (needsLogin && window.app.Store.loggedIn === false) {
+                window.app.Router.go("/account/login")
+                return;
+            }
+        }
+
+
         // debugger;
         if (pageElement === null) {
             pageElement = document.createElement("h1")

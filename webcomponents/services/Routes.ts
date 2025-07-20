@@ -8,31 +8,38 @@ import { RegisterPage } from "../components/RegisterPage";
 type Route = {
     path: string | RegExp;
     component: typeof HTMLElement;
+    loggedIn: boolean
 }
 
 export const ROUTES: Route[] = [
     {
         path: "/",
-        component: HomePage
+        component: HomePage,
+        loggedIn: false
     },
     {
         path: /\/movies\/(\d+)/,
-        component: MovieDetailsPage
+        component: MovieDetailsPage,
+        loggedIn: false
     },
     {
         path: "/movies", //Search results
-        component: MoviesPage
+        component: MoviesPage,
+        loggedIn: false
     },
     {
         path: "/account/register", //Register
-        component: RegisterPage
+        component: RegisterPage,
+        loggedIn: false
     },
     {
         path: "/account/login", //Login
-        component: LoginPage
+        component: LoginPage,
+        loggedIn: false
     },
     {
         path: "/account/",
-        component: AccountPage
+        component: AccountPage,
+        loggedIn: true
     }
 ]
